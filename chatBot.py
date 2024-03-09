@@ -7,8 +7,8 @@ if( user_input == ""):
 
 
 # Replace "YOUR_ACTUAL_API_KEY" with your Groq API key
-api_key = "YOUR_GROQ_API_KEY"
-api_key2 = "YOUR_GROQ_API_KEY"
+api_key = "YOUR_GROQ_API_KEY"  # groq api key
+api_key2 = "YOUR_GROQ_API_KEY"  # groq api key
 
 client = Groq(
     api_key=api_key2,
