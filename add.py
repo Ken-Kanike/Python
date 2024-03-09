@@ -1,5 +1,4 @@
 a = 10
-b = 20
+b = 30
 c = a + b
 print("sum = " , c)
-
