@@ -1,0 +1,12 @@
+set1={1,2,3,4,5}
+set2={4,5,6,7,8}
+inter=set1.intersection(set2)
+print(inter)
+union=set1.union(set2)
+print(union)
+diff=set1.diff(set2)
+print(diff)
+sy_diff=set1.symmetric_difference(set2)
+print(sy_diff)
+set1.clear()
+print(set1)
