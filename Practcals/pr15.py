@@ -19,6 +19,28 @@ class Employee:
 emp = Employee("John Doe", "HR", 50000)
 emp.print_employee_info()
 
+#or
+class Employee2:
+    name = ""
+    department = ""
+    salary = 0
+    
+    def read_employee_info(self):
+        self.name = input("Enter employee name: ")
+        self.department = input("Enter employee department: ")
+        self.salary = float(input("Enter employee salary: "))
+    
+    def print_employee_info(self):
+        print("Employee Name:", self.name)
+        print("Department:", self.department)
+        print("Salary:", self.salary)
+
+# Test the class
+emp = Employee2()
+emp.read_employee_info()
+emp.print_employee_info()
+
+
 
 # 2. Python program to read and print students information using two classes using simple inheritance.
 class Student:
