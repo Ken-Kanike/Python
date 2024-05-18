@@ -1,4 +1,3 @@
-'''
 #class
 class Student:
     rollno = 101
@@ -23,7 +22,8 @@ obj2.show_data()
 #public ,private and protected members and constructor
 class Student3:
     def __init__(self):  #constructor
-        self.rollno = 101     #publit
+        self.rollno = 101     #public
+        
         self.__name = "abc"    #private  _ _
         self._dept = "CO"     #protected _
 obj3 = Student3()
@@ -173,4 +173,3 @@ print("Name: ",s.name)
 print("Total marks: ",s.total_marks())
 
 #spelizing inheritance methods?
-'''

@@ -1,4 +1,3 @@
-'''
 #reading input from keyboard
 #WAP for gross salary and net salray where,
 # HRA is 10% of basic salary
@@ -45,7 +44,12 @@ b = 200
 print("Before swap \na = %d \nb = %d"%(a,b))
 a ,b = b,a
 print("After swap \na = {} \nb = {}".format(a,b))
+print(f'The value of a is {a}')
+print(f'The value of b is {b}')
 
+
+
+# file handling  
 
 #opening a file
 # file_obj = open("Filename/path",mode)
@@ -53,8 +57,18 @@ f =  open("DemoFile.txt",'w')
 #closing a file
 f.close()
 
+#opening file using with
+with open("DemoFile.txt",'rt') as f:
+    print(f.read())
+f.close()
 
 #reading from file
+#read()
+#readline()
+#readlines()
+#list()
+#for loop
+
 #uing read()
 f = open("DemoFile.txt",'rt')
 print(f.read())   # reads everything in file
@@ -83,18 +97,13 @@ for line in f:
     print(line)  
 f.close()
 
-#opening file using with
-with open("DemoFile.txt",'rt') as f:
-    print(f.read())
-f.close()
 
 
 #Wap to find and print lines in DemoFile.txt starting with 'Welcome' word
 f = open("DemoFile.txt",'rt')
-i = 0
 for line in f:
-    line = line.strip()
-    if line.find("Welcome") == -1:
+    line = line.strip().lower()
+    if line.find("welcome") == -1:
         continue
     print(line)
 f.close()
@@ -108,6 +117,9 @@ f.close()
 
 
 #writing into files
+#write()
+#writelines()
+#write() in 'a' mode
 #using write()
 f =  open("DemoFile.txt",'wt')
 f.write("This is a new written line") # writes simpe line/lines using \n
@@ -207,9 +219,9 @@ c = set("bcdfghjklmnpqrstvwxyz")
 v_count = 0
 c_count = 0
 for letter in f.read():
-    if letter in v:
+    if letter.lower() in v:
         v_count+=1
-    elif letter in c:
+    elif letter.lower() in c:
         c_count+=1
 f.close()
 print("Nuumber of vowels =",v_count)
@@ -323,4 +335,3 @@ except DivideByZero:
     print("Divide by zero error")
 else:
     print("The result is: ",c)   
-'''

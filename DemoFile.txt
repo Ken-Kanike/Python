@@ -1,2 +1,4 @@
-thisis1st line ,this is 2nd line
-thsis 3rd line
+This is a new written line
+This is written in Python
+Welcoome to Python
+This is another new written line
