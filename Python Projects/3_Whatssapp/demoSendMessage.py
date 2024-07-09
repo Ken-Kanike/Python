@@ -51,6 +51,9 @@ keyboard.press_and_release('ctrl+w')  # close the current tab
 # keyboard.press_and_release('alt+f4')  # close the browser
 # print("Tab and browser closed!")
 
+
+
+
 # kit.sendwhatmsg("+91xxxxxxxxx", "Hello", 12, 30,
 #                 auto_close=True, wait_time=10, tab_close=True, close_time=10,
 #                 close_tab=True, close_browser=True, close_app=True, close_pc=True)
