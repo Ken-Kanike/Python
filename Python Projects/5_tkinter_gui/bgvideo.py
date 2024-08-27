@@ -38,7 +38,7 @@ class Main:
     def ready_gif(self):
         global frame_delay
         try:
-            gif_file = Image.open(r"/path/to/project\Python Projects\5_tkinter_gui\face-scan-min.gif")
+            gif_file = Image.open(r"face_phone.gif")
             for frame in range(gif_file.n_frames):
                 gif_file.seek(frame)
                 copy = gif_file.copy()
