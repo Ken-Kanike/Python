@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expandable Table Row with Plus Sign Button</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    .expandable-content {
+      display: none;
+      background-color: #f9f9f9;
+      padding: 10px;
+    }
+    .dropdown-btn {
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 5px;
+      font-size: 20px; /* Larger font for the plus sign */
+      text-align: center;
+    }
+    .dropdown-btn:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John Doe</td>
+      <td>28</td>
+      <td><button class="dropdown-btn" onclick="toggleContent(this)"> &#9660;</button></td>
+    </tr>
+    <tr class="expandable-content">
+      <td colspan="3">This is some additional content for John Doe. It can be more detailed information.</td>
+    </tr>
+
+    <tr>
+      <td>Jane Smith</td>
+      <td>32</td>
+      <td><button class="dropdown-btn" onclick="toggleContent(this)"> &#9660;</button></td>
+    </tr>
+    <tr class="expandable-content">
+      <td colspan="3">This is some additional content for Jane Smith.</td>
+    </tr>
+
+    <!-- Row with no content to demonstrate button absence -->
+    <tr>
+      <td>Sam Johnson</td>
+      <td>25</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+  function toggleContent(button) {
+    const row = button.closest('tr');
+    const nextRow = row.nextElementSibling;
+
+    if (nextRow.classList.contains('expandable-content')) {
+        const isRowVisible = nextRow.style.display === 'table-row';
+      nextRow.style.display = isRowVisible ? 'none' : 'table-row';
+
+      // Update button text to show the appropriate arrow
+      button.innerHTML = isRowVisible ? '&#9660;' : '&#9650;'; // Down arrow (&#9660;) for hidden, Up arrow (&#9650;) for visible
+    }
+  }
+
+  // Hide the expand button if no content exists
+  const rows = document.querySelectorAll('tr');
+  rows.forEach(row => {
+    const button = row.querySelector('.dropdown-btn');
+    if (row.nextElementSibling && row.nextElementSibling.classList.contains('expandable-content') && !row.nextElementSibling.textContent.trim()) {
+      button.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
