@@ -10,6 +10,7 @@ def get_questions_for_roll(roll_number):
     return assigned_questions
 
 # Ask for the roll number
+
 try:
     roll_number = int(input("Enter your roll number (1-140): "))  # User input
     if 1 <= roll_number <= 140:
@@ -20,4 +21,4 @@ try:
     else:
         print("Invalid roll number! Please enter a number between 1 and 70.")
 except ValueError:
-    print("Invalid input! Please enter a valid roll number.")
+    print("Invalid input! Please enter a valid roll number.")    
