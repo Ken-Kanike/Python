@@ -20,5 +20,6 @@ try:
             print(f"- {q}")
     else:
         print("Invalid roll number! Please enter a number between 1 and 70.")
-except ValueError:
+except ValueError:  
+    
     print("Invalid input! Please enter a valid roll number.")    
