@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Master Playground | Interactive Code Explorer & Web REPL</title>
+  <meta name="description" content="Explore, read, edit, and execute 100+ Python files directly in your browser with zero setup. Powered by WebAssembly & CPython 3.12.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Prism.js Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Pyodide WebAssembly Python Runtime -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+</head>
+<body>
+  <!-- Background Glow & Grid Canvas -->
+  <div class="bg-glow bg-glow-blue"></div>
+  <div class="bg-glow bg-glow-gold"></div>
+  <div class="grid-overlay"></div>
+
+  <!-- Header Navigation -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="logo-wrapper">
+        <svg class="python-svg" viewBox="0 0 110 110" width="34" height="34">
+          <defs>
+            <linearGradient id="pyGradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#387eb8"/>
+              <stop offset="100%" stop-color="#2a5f8b"/>
+            </linearGradient>
+            <linearGradient id="pyGradGold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffe873"/>
+              <stop offset="100%" stop-color="#ffd43b"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#pyGradBlue)" d="M53.3 2.1c-26.1 0-24.5 11.3-24.5 11.3l.1 11.7h25v3.5H19.7S2.1 26.6 2.1 52.9c0 26.3 15.4 25.4 15.4 25.4h9.2v-12.9s-.5-15.4 15.2-15.4h24.7s14.6.2 14.6-14.3V16.4S78.8 2.1 53.3 2.1zm-13.6 7.4c2.5 0 4.6 2 4.6 4.6s-2 4.6-4.6 4.6-4.6-2-4.6-4.6 2.1-4.6 4.6-4.6z"/>
+          <path fill="url(#pyGradGold)" d="M56.7 107.9c26.1 0 24.5-11.3 24.5-11.3l-.1-11.7h-25v-3.5h34.2s17.6 2 17.6-24.3c0-26.3-15.4-25.4-15.4-25.4h-9.2v12.9s.5 15.4-15.2 15.4H43.4s-14.6-.2-14.6 14.3v19.3s-2.6 14.3 27.9 14.3zm13.6-7.4c-2.5 0-4.6-2-4.6-4.6s2-4.6 4.6-4.6 4.6 2 4.6 4.6-2.1 4.6-4.6 4.6z"/>
+        </svg>
+        <div class="logo-text">
+          <span class="logo-title">Python<span class="highlight">Master</span></span>
+          <span class="logo-badge">Interactive Hub</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div id="runtime-status-badge" class="status-pill status-loading">
+        <span class="status-dot"></span>
+        <span id="runtime-status-text">Booting WebAssembly Python 3.12...</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button id="btn-copy-clone" class="btn btn-glass" title="Copy git clone command">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        <span>git clone</span>
+      </button>
+
+      <a href="https://github.com/Ken-Kanike/Python" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="btn-github-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub Repo</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Application Workspace -->
+  <main class="app-workspace">
+    <!-- Left Panel: File Explorer & Categories -->
+    <aside class="sidebar" id="sidebar-panel">
+      <div class="sidebar-header">
+        <div class="search-box">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="file-search-input" placeholder="Search 100+ files & topics..." autocomplete="off">
+          <button id="btn-clear-search" class="btn-icon" style="display:none;" title="Clear">✕</button>
+        </div>
+
+        <div class="category-filter-chips">
+          <button class="chip active" data-cat="all">All</button>
+          <button class="chip" data-cat="Core Fundamentals">Core</button>
+          <button class="chip" data-cat="Advanced Masterclasses">Advanced</button>
+          <button class="chip" data-cat="Data Science & Packages">Libraries</button>
+          <button class="chip" data-cat="Lab Practicals & Exams">Practicals</button>
+          <button class="chip" data-cat="Projects & Applications">Projects</button>
+        </div>
+      </div>
+
+      <!-- File Navigation Tree -->
+      <div class="file-tree-container" id="file-tree-container">
+        <!-- Rendered dynamically via JavaScript -->
+        <div class="loading-spinner-state">
+          <div class="spinner"></div>
+          <p>Indexing repository files...</p>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <span id="file-counter-label">104 Files Indexed</span>
+        <button id="btn-refresh-catalog" class="btn-link" title="Re-index">Sync Catalog</button>
+      </div>
+    </aside>
+
+    <!-- Center & Right Panel: Code Editor & Interactive Terminal -->
+    <section class="editor-workspace" id="editor-workspace">
+      <!-- Editor Toolbar -->
+      <div class="editor-header">
+        <div class="editor-tabs">
+          <div class="active-tab" id="active-tab-indicator">
+            <span class="file-icon">🐍</span>
+            <span id="active-file-title">chapter7_oop_advanced.py</span>
+            <span class="modified-tag" id="modified-indicator" style="display:none;">Edited</span>
+          </div>
+        </div>
+
+        <div class="editor-actions">
+          <button id="btn-reset-code" class="btn btn-secondary btn-sm" title="Revert to original file code">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            <span>Reset</span>
+          </button>
+
+          <button id="btn-copy-code" class="btn btn-secondary btn-sm" title="Copy code to clipboard">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>Copy</span>
+          </button>
+
+          <button id="btn-download-code" class="btn btn-secondary btn-sm" title="Download this file">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Download</span>
+          </button>
+
+          <button id="btn-run-code" class="btn btn-run btn-sm" title="Execute Python code in browser">
+            <svg class="run-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <span id="run-button-text">Run in Browser</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Code Surface -->
+      <div class="code-area-container">
+        <!-- Interactive Code Textarea -->
+        <div class="editor-surface-wrapper">
+          <div class="line-numbers" id="line-numbers">1</div>
+          <textarea id="code-editor-textarea" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+          <pre class="highlight-preview"><code id="code-highlight-display" class="language-python"></code></pre>
+        </div>
+      </div>
+
+      <!-- Bottom / Split Terminal Panel -->
+      <div class="terminal-panel" id="terminal-panel">
+        <div class="terminal-header">
+          <div class="terminal-header-left">
+            <div class="terminal-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <span class="terminal-title">Console Output (CPython 3.12 WebAssembly)</span>
+            <span id="execution-time-badge" class="time-badge" style="display:none;">⚡ 0ms</span>
+          </div>
+
+          <div class="terminal-header-right">
+            <button id="btn-toggle-repl" class="btn btn-ghost btn-xs" title="Switch between file run and interactive REPL">
+              Interactive REPL
+            </button>
+            <button id="btn-clear-terminal" class="btn btn-ghost btn-xs" title="Clear console output">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <div class="terminal-body" id="terminal-body">
+          <div class="terminal-welcome-msg">
+            <span class="prompt-symbol">>>></span> Select any Python file from the left sidebar and click <strong style="color:var(--py-gold);">▶ Run in Browser</strong>.
+            <br><span class="text-muted">Runs 100% client-side with full standard library support. Zero install or clone required.</span>
+          </div>
+        </div>
+
+        <!-- Interactive REPL Input Prompt -->
+        <div class="terminal-repl-bar" id="terminal-repl-bar" style="display:none;">
+          <span class="repl-prompt-symbol">>>></span>
+          <input type="text" id="repl-input" placeholder="Type Python expression and press Enter (e.g. math.sqrt(256), [x**2 for x in range(5)])..." autocomplete="off">
+          <button id="btn-submit-repl" class="btn btn-run btn-xs">Exec</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Notification Overlay -->
+  <div id="toast" class="toast-notification">Notification</div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="code_catalog.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,10 +1,11 @@
+import os
 from flask import Flask, request, jsonify
 from groq import Groq
 
 app = Flask(__name__)
 
-# Replace "YOUR_ACTUAL_API_KEY" with your Groq API key
-API_KEY = "YOUR_GEMINI_API_KEY"
+# Set your Groq API key in your environment variables or replace placeholder below
+API_KEY = os.getenv("GROQ_API_KEY", "YOUR_GROQ_API_KEY")
 
 client = Groq(api_key=API_KEY)
 

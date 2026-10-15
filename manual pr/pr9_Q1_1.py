@@ -1,4 +1,4 @@
-d={'MSBTE':'StudentA','CO':'StudentB','SEM':'StudentC'}
+d = {'BOARD': 'StudentA', 'CO': 'StudentB', 'SEM': 'StudentC'}
 del d['CO'];
 for key, values in d.items():
     print(key);

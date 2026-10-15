@@ -1,1 +1,24 @@
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+PyWhatKit_DB.txt
 PyMySQL/data.json
+
+# IDE & Editor files
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Python compiled bytecode & caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Temporary & runner files
+tempCodeRunnerFile.py
+*.tmp

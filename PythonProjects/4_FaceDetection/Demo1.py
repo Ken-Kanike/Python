@@ -1,7 +1,7 @@
 import cv2
 
 # Load the pre-trained face detection model
-face_cap = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+face_cap = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
 # Initialize the video capture device (default camera)
 video_cap = cv2.VideoCapture(0)

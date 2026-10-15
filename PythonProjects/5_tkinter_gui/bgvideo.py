@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from PIL import Image, ImageTk
 import threading
@@ -38,7 +39,8 @@ class Main:
     def ready_gif(self):
         global frame_delay
         try:
-            gif_file = Image.open(r"face_phone.gif")
+            gif_path = os.path.join(os.path.dirname(__file__), "face_phone.gif")
+            gif_file = Image.open(gif_path)
             for frame in range(gif_file.n_frames):
                 gif_file.seek(frame)
                 copy = gif_file.copy()

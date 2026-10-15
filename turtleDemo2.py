@@ -16,4 +16,4 @@ for i in range(6000):
     for j in range(5):
         color("#f73487")
     goto(0,0)
-done
+done()
